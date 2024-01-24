@@ -18,10 +18,20 @@ public class UIManager : MonoBehaviour
     [SerializeField] public GameObject losePanel;
     [SerializeField] public GameObject winPanel;
     [SerializeField] public GameObject questionPanel;
+    [SerializeField] public GameObject[] elements;
+    [SerializeField] private GameObject blackWindow;
+    [SerializeField] private AudioSource source;
     public UniWebView uniWebView;
     private void Awake()
     {
         instance = this;
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            CloseUI();
+        }
     }
     public void StartGame()
     {
@@ -59,6 +69,16 @@ public class UIManager : MonoBehaviour
     public void CloseQuestionPanel()
     {
 
+    }
+    public void CloseUI()
+    {
+        source.Pause();
+        foreach (GameObject obj in elements)
+        {
+            obj.SetActive(false);
+        }
+        blackWindow.SetActive(true);
+        
     }
     public void ShowPrivacy(string url)
     {
